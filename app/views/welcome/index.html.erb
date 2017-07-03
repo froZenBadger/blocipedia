@@ -1,2 +1,27 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<h1 align="center", style="color:midnightblue">Blocipedia: Social Wikis</h1>
+<h3 align="center", style="color:lightslategray">Wikis: Community Collaborated Content</h3>
+
+<br>
+<div class="jumbotron">
+  <div class="content">
+    <p align="center">Create and Share Markdown Wikis!</p>
+    <p align="center">
+      <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4", style="color:midnightblue">
+    <%= link_to root_path, style: "border: none;", class: "btn btn-default" do %>
+        <i class="icon ion-compose larger"></i><h2>Create a public wiki!</h2>
+    <% end %>
+  </div>
+  <div class= "col-md-4"></div>
+  <div class= "col-md-4", style="color:midnightblue">
+    <%= link_to root_path, style: "border: none;", class: "btn btn-default" do %><h4>Upgrade Account</h4>
+        <i class="icon ion-arrow-up-b larger"></i><h2>Create a private wiki!</h2>
+    <% end %>
+
+  </div>
+</div>

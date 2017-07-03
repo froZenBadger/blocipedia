@@ -13,13 +13,7 @@ source 'https://rubygems.org'
    gem 'web-console', '~> 2.0'
  end
 
- gem 'sass-rails', '~> 5.0'
- gem 'uglifier', '>= 1.3.0'
- gem 'coffee-rails', '~> 4.1.0'
- gem 'jquery-rails'
- gem 'turbolinks'
- gem 'bootstrap'
- gem 'figaro'
+
 
  group :development, :test do
    gem 'byebug'
@@ -31,4 +25,14 @@ source 'https://rubygems.org'
    gem 'pry-rails'
  end
 
+gem 'sass-rails', '~> 5.0'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.1.0'
+gem 'jquery-rails'
+gem 'turbolinks'
+gem 'figaro'
 gem 'bootstrap-sass'
+gem 'bcrypt', '~> 3.1.7'
+gem 'nyan-cat-formatter'
+gem 'devise'
+gem 'ionicons-rails'

@@ -1,0 +1,34 @@
+<!-- <p id="notice"><%= notice %></p>
+
+<p>
+  <strong>New:</strong>
+  <%= @user.new %>
+</p>
+
+<p>
+  <strong>Show:</strong>
+  <%= @user.show %>
+</p> -->
+<!-- <%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %> -->
+<div class="row">
+  <div class="col-md-8">
+    <div class="media">
+      <br />
+      <% avatar_url = @user.avatar_url(128) %>
+      <% if avatar_url %>
+        <div class="media-left">
+          <%= image_tag avatar_url, class: 'media-object' %>
+        </div>
+      <% end %>
+      <div class="media-body">
+        <h2 class="media-heading"><%= @user.email %></h2>
+        <!-- <small>
+          <%= pluralize(@user.wikis.count, 'wiki') %>,
+        </small> -->
+      </div>
+    </div>
+  </div>
+</div>
+<h2>Wikis</h2>
+<!-- <%= render @user.wikis %> -->
