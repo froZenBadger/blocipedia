@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :wikis
   devise_for :users, :path => 'u'
 
   devise_scope :user do

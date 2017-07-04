@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+<div>
+  <h1>
+    <%= @wiki.title %> <br>
+  </h1>
+  <h4>
+    <small>
+      submitted <%= time_ago_in_words(@wiki.created_at) %> ago by <%= @wiki.user %>
+    </small>
+  </h4>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <p><%= @wiki.body %></p>
+  </div>
+  <br>
+  <br>
+  <div class="col-md-4">
+    <%= link_to 'Edit', edit_wiki_path(@wiki), class: 'btn btn-primary' %>
+    <%= link_to 'Delete Wiki', @wiki, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    <%= link_to 'Back', wikis_path, class: 'btn btn-primary' %>
+  </div>
+</div>

@@ -11,7 +11,7 @@
   <div class="container">
     <ul class="nav nav-tabs">
       <li><%= link_to "Blocipedia", root_path %></li>
-      <li><%= link_to "Wikis", root_path %></li>
+      <li><%= link_to "Wikis", wikis_path %></li>
       <li><%= link_to "About", about_path %></li>
 
       <div class="pull-right user-info">
@@ -19,7 +19,7 @@
           <%= image_tag current_user.avatar_url(48), class: "gravatar" %>
           <div class="pull-right">
             Signed in as:
-            <%= link_to current_user.email, edit_user_registration_path, :class => 'navbar-link' %> 
+            <%= link_to current_user.email, edit_user_registration_path, :class => 'navbar-link' %>
             <%= link_to destroy_user_session_path, method: :delete, style: "border: none;", class: "btn btn-default navbar-link" do %>
                 <i class="icon ion-android-exit larger"></i>
             <% end %>
