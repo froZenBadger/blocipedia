@@ -1,24 +1,16 @@
 class User < ActiveRecord::Base
   has_many :wikis
 
-  before_save { self.email = email.downcase if email.present? }
+  enum role: [:standard, :premium, :admin]
+  after_initialize :set_default_role, :if => :new_record?
 
-  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  def set_default_role
+    self.role ||= :standard
+  end
 
-  validates :name, length: { minimum: 1, maximum: 100 }, presence: true
-  validates :password, presence: true, length: { minimum: 6 }, if: "password_digest.nil?"
-  validates :password, length: { minimum: 6 }, allow_blank: true
-  validates :email,
-             presence: true,
-             uniqueness: { case_sensitive: false },
-             length: { minimum: 3, maximum: 254 },
-             format: { with: EMAIL_REGEX}
-
-  has_secure_password
-  
-  #Devise default modules: :lockable, :timeoutable and :omniauthable
+  #Devise default modules: :lockable, :timeoutable and :omniauthable :confirmable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable 
 
  def avatar_url(size)
    gravatar_id = Digest::MD5::hexdigest(self.email).downcase

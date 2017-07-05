@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.3'
+#ruby '2.3.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 
@@ -14,16 +14,16 @@ group :development do
  gem 'web-console', '~> 2.0'
 end
 
-
-
 group :development, :test do
  gem 'byebug'
  gem 'spring'
  gem 'rspec-rails'
  gem 'shoulda'
- gem 'faker'
+ gem 'shoulda-matchers'
+ gem 'capybara'
  gem 'factory_girl_rails'
  gem 'pry-rails'
+ gem 'database_cleaner'
 end
 
 gem 'sass-rails', '~> 5.0'
@@ -37,3 +37,5 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'nyan-cat-formatter'
 gem 'devise'
 gem 'ionicons-rails'
+gem 'pundit'
+gem 'faker'

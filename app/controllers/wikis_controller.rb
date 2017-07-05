@@ -1,11 +1,12 @@
 class WikisController < AuthenticatedController
   before_action :set_wiki, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user, only: [:edit, :update, :destroy]
+  before_action :authorize_user, except: [:index, :new, :create]
 
   #Comments format
   #HTTP Verb  url
   # GET /wikis
   def index
+    authorize Wiki
     @wikis = Wiki.all
   end
 
@@ -15,6 +16,7 @@ class WikisController < AuthenticatedController
 
   # GET /wikis/new
   def new
+    authorize Wiki
     @wiki = Wiki.new
   end
 
@@ -24,6 +26,7 @@ class WikisController < AuthenticatedController
 
   # POST /wikis
   def create
+    authorize Wiki
     @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user
 
@@ -66,9 +69,6 @@ class WikisController < AuthenticatedController
     end
 
     def authorize_user
-      wiki = Wiki.find(params[:id])
-      unless current_user.id == wiki.user_id
-        redirect_to wiki, alert: "You do not have authorization to do that."
-      end
+      authorize @wiki
     end
 end
