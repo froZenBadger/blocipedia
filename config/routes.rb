@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :show, :index]
 
+  resources :charges, only: [:new, :create]
+
   get 'about' => 'welcome#about'
 
   root 'welcome#index'
