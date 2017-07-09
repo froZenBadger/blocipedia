@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
  def downgrade_wikis
    if self.role == 'standard'
      self.wikis.each do |wiki|
-       wiki.private = false
+       wiki.update(private: false)
      end
    end
  end
