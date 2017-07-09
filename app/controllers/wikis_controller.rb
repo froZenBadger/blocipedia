@@ -10,7 +10,7 @@ class WikisController < AuthenticatedController
     if current_user.role == 'admin' || current_user.role == 'premium'
       @wikis = Wiki.all
     else
-      @wikis = Wiki.where(private: false)  
+      @wikis = Wiki.where(private: false)
     end
   end
 

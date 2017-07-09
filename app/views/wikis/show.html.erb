@@ -11,7 +11,7 @@
 </div>
 <div class="row">
   <div class="col-md-8">
-    <p><%= @wiki.body %></p>
+    <p><%= Wiki.markdown(@wiki.body) %></p>
   </div>
   <br>
   <br>
