@@ -45,45 +45,54 @@ class ChargesController < ApplicationController
   #    redirect_to new_charge_path
   #
   # end
-def new
-end
-
-def create
-  @amount = params[:amount]
-
-  @amount = @amount.gsub('$', '').gsub(',', '')
-
-  begin
-    @amount = Float(@amount).round(2)
-  rescue
-    flash[:error] = 'Charge not completed. Please enter a valid amount in USD ($).'
-    redirect_to new_charge_path
-    return
+  def new
   end
 
-  @amount = (@amount * 100).to_i # Must be an integer!
+  def create
+    @amount = params[:amount]
 
-  if @amount < 500
-    flash[:error] = 'Charge not completed. Donation amount must be at least $5.'
-    redirect_to new_charge_path
-    return
-  end
+    @amount = @amount.gsub('$', '').gsub(',', '')
 
-  customer = Stripe::Customer.create(
-     email: current_user.email,
-     card: params[:stripeToken]
-  )
+    begin
+      @amount = Float(@amount).round(2)
+    rescue
+      flash[:error] = 'Charge not completed. Please enter a valid amount in USD ($).'
+      redirect_to new_charge_path
+      return
+    end
 
-  Stripe::Charge.create(
-    customer: customer.id,
-    :amount => @amount,
-    :currency => 'usd',
-    # :source => params[:stripeToken],
-    :description => 'Custom donation'
-  )
+    @amount = (@amount * 100).to_i # Must be an integer!
 
-  rescue Stripe::CardError => e
-    flash[:error] = e.message
-    redirect_to new_charge_path
+    if @amount < 1500
+      flash[:error] = 'Charge not completed. Payment amount must be at least $15.'
+      redirect_to new_charge_path
+      return
+    end
+
+    begin
+      customer = Stripe::Customer.create(
+         email: current_user.email,
+         card: params[:stripeToken]
+      )
+
+      Stripe::Charge.create(
+        customer: customer.id,
+        :amount => @amount,
+        :currency => 'usd',
+        # :source => params[:stripeToken],
+        :description => 'Premium Membership payment'
+      )
+
+      current_user.role = 'premium'
+      current_user.save!
+      flash[:notice] = "Thank you for your payment, #{current_user.email}!"
+
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      flash[:alert] = "Account upgrade failed. please try again."
+      redirect_to new_charge_path
+    rescue => e
+      redirect_to new_charge_path, alert: 'Oops, please try again'
+    end
   end
 end

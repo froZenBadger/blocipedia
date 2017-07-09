@@ -21,5 +21,6 @@
     <%= f.submit "Change my password" %>
   </div>
 <% end %>
+<%= link_to "Downgrade Your Account", downgrade_path, method: :downgrade, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to downgrade? You will have to pay $15 again to become a premium member!'} %>
 
 <%= render "devise/shared/links" %>

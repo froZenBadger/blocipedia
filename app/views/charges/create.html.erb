@@ -1,3 +1,6 @@
 <h2>Thank you!</h2>
 <p>Your payment of <strong><%= number_to_currency(@amount * 0.01) %></strong>
- has been received.</p>
+ has been received. Enjoy all the perks of your premium membership!</p>
+<%= link_to new_wiki_path, style: "border: none;", class: "btn btn-default" do %>
+    <i class="icon ion-compose larger"></i><h2>Create a private wiki!</h2>
+<% end %>

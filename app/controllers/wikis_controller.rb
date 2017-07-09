@@ -7,7 +7,11 @@ class WikisController < AuthenticatedController
   # GET /wikis
   def index
     authorize Wiki
-    @wikis = Wiki.all
+    if current_user.role == 'admin' || current_user.role == 'premium'
+      @wikis = Wiki.all
+    else
+      @wikis = Wiki.where(private: false)  
+    end
   end
 
   # GET /wikis/1

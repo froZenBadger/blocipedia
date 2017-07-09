@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :charges, only: [:new, :create]
 
   get 'about' => 'welcome#about'
+  post 'downgrade' => 'users#downgrade'
 
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.

@@ -6,7 +6,9 @@
   <div class="content">
     <p align="center">Create and Share Markdown Wikis!</p>
     <p align="center">
-      <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+      <% if current_user == nil %>
+        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+      <% end %>
     </p>
   </div>
 </div>
@@ -19,9 +21,19 @@
   </div>
   <div class= "col-md-4"></div>
   <div class= "col-md-4", style="color:midnightblue">
-    <%= link_to new_charge_path, style: "border: none;", class: "btn btn-default" do %><h4>Upgrade Account</h4>
-        <i class="icon ion-arrow-up-b larger"></i><h2>Create a private wiki!</h2>
+    <% if current_user == nil %>
+        <%= link_to new_user_registration_path, style: "border: none;", class: "btn btn-default" do %>
+            <i class="icon ion-compose larger"></i><h2>Create a private wiki!</h2>
+            <h6>You must sign up before upgrading account</h6>
+        <% end %>
+    <% elsif current_user.role == 'standard' %>
+      <%= link_to new_charge_path, style: "border: none;", class: "btn btn-default" do %><h4>Upgrade Account</h4>
+          <i class="icon ion-arrow-up-b larger"></i><h2>Create a private wiki!</h2>
+      <% end %>
+    <% else %>
+      <%= link_to new_wiki_path, style: "border: none;", class: "btn btn-default" do %>
+          <i class="icon ion-compose larger"></i><h2>Create a private wiki!</h2>
+      <% end %>
     <% end %>
-
   </div>
 </div>
